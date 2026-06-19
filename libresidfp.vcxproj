@@ -189,4 +189,19 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <!--
+    Generate the autotools-templated headers (siddefs-fp.h and
+    residfp/sidversion.h) from their .in templates. The version comes from
+    configure.ac; the compiler-specific knobs are fixed for MSVC (no
+    __builtin_expect, inlining on). Keeps them in sync with the submodule so a
+    version bump needs no hand-edits. Incremental: runs only when a template,
+    configure.ac, or the generator script changes.
+  -->
+  <Target Name="GenerateBuildHeaders" BeforeTargets="ClCompile"
+          Inputs="$(ProjectDir)src\siddefs-fp.h.in;$(ProjectDir)src\residfp\sidversion.h.in;$(ProjectDir)configure.ac;$(ProjectDir)tools\gen-header.ps1"
+          Outputs="$(ProjectDir)src\siddefs-fp.h;$(ProjectDir)src\residfp\sidversion.h">
+    <Message Importance="high" Text="libresidfp: generating version/siddefs headers from .in templates" />
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(ProjectDir)tools\gen-header.ps1&quot; -In &quot;$(ProjectDir)src\siddefs-fp.h.in&quot; -Out &quot;$(ProjectDir)src\siddefs-fp.h&quot; -ConfigureAc &quot;$(ProjectDir)configure.ac&quot; -Subst &quot;RESIDFP_BRANCH_HINTS=1;HAVE_BUILTIN_EXPECT=0;RESIDFP_INLINING=1;RESIDFP_INLINE=inline&quot;" />
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(ProjectDir)tools\gen-header.ps1&quot; -In &quot;$(ProjectDir)src\residfp\sidversion.h.in&quot; -Out &quot;$(ProjectDir)src\residfp\sidversion.h&quot; -ConfigureAc &quot;$(ProjectDir)configure.ac&quot;" />
+  </Target>
 </Project>
