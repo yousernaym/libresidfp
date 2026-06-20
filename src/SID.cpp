@@ -184,6 +184,12 @@ void SID::enableOld6581caps(bool enable)
     filter6581->enableOldCaps(enable);
 }
 
+void SID::getEnvelopeOutputs(uint8_t envelopes[3]) const
+{
+    for (int i = 0; i < 3; i++)
+        envelopes[i] = static_cast<uint8_t>(voice[i].envelope()->output());
+}
+
 void SID::voiceSync(bool sync)
 {
     if (sync)

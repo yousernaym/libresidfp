@@ -179,6 +179,8 @@ public:
      */
     ChipModel getChipModel() const { return model; }
 
+    void getEnvelopeOutputs(uint8_t envelopes[3]) const;
+
     /**
      * Set combined waveforms strength.
      *

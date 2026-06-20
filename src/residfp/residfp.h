@@ -23,6 +23,8 @@
 #ifndef RESIDFP_H
 #define RESIDFP_H
 
+#include <cstdint>
+
 #include "residfp/residfp_defs.h"
 #include "residfp/sidversion.h"
 
@@ -61,6 +63,11 @@ public:
      * Get currently emulated chip model.
      */
     ChipModel getChipModel() const;
+
+    /**
+     * Get the current digital ADSR envelope output for all three voices.
+     */
+    void getEnvelopeOutputs(uint8_t envelopes[3]) const;
 
     /**
      * Set combined waveforms strength.
