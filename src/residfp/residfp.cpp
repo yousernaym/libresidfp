@@ -52,11 +52,6 @@ ChipModel residfp::getChipModel() const
     return sid.getChipModel();
 }
 
-void residfp::getEnvelopeOutputs(uint8_t envelopes[3]) const
-{
-    sid.getEnvelopeOutputs(envelopes);
-}
-
 bool residfp::setCombinedWaveforms(CombinedWaveforms cws)
 {
     try

@@ -32,6 +32,7 @@
     <ClCompile Include="src\*.cpp" />
     <ClCompile Include="src\*.cc" />
     <ClCompile Include="src\residfp\*.cpp" />
+    <ClCompile Include="src\vm-extensions\*.cpp" />
     <ClCompile Include="src\resample\*.cpp" />
     <!-- Standalone resampler test program, not part of the library. -->
     <ClCompile Remove="src\resample\test.cpp" />
